@@ -55,15 +55,19 @@ def buttonOperation(stringval):
             operation.append('+')
             value = 0
             # print(operation)
-
         else:
-            operation.append(value)
-            executeOperation()
-            operation = []
-            operation.append(float(v.get()))
-            operation.append('+')
-            value = 0
-            # print(operation)
+            if (len(operation) == 2):
+                del operation[-1]
+                operation.append('+')
+                # print(operation)
+            else:
+                operation.append(value)
+                executeOperation()
+                operation = []
+                operation.append(float(v.get()))
+                operation.append('+')
+                value = 0
+                # print(operation)
 
     if(stringval == '-'):
         if (len(operation) == 0):
@@ -73,13 +77,19 @@ def buttonOperation(stringval):
             # print(operation)
 
         else:
-            operation.append(value)
-            executeOperation()
-            operation = []
-            operation.append(float(v.get()))
-            operation.append('-')
-            value = 0
-            # print(operation)
+            if (len(operation) == 2):
+                del operation[-1]
+                operation.append('-')
+                # print(operation)
+
+            else:
+                operation.append(value)
+                executeOperation()
+                operation = []
+                operation.append(float(v.get()))
+                operation.append('-')
+                value = 0
+                # print(operation)
 
     if(stringval == 'x'):
         if (len(operation) == 0):
@@ -89,13 +99,19 @@ def buttonOperation(stringval):
             # print(operation)
 
         else:
-            operation.append(value)
-            executeOperation()
-            operation = []
-            operation.append(float(v.get()))
-            operation.append('x')
-            value = 0
-            # print(operation)
+            if (len(operation) == 2):
+                del operation[-1]
+                operation.append('x')
+                # print(operation)
+
+            else:
+                operation.append(value)
+                executeOperation()
+                operation = []
+                operation.append(float(v.get()))
+                operation.append('x')
+                value = 0
+                # print(operation)
 
     if(stringval == '/'):
         if (len(operation) == 0):
@@ -105,13 +121,19 @@ def buttonOperation(stringval):
             # print(operation)
 
         else:
-            operation.append(value)
-            executeOperation()
-            operation = []
-            operation.append(float(v.get()))
-            operation.append('/')
-            value = 0
-            # print(operation)
+            if (len(operation) == 2):
+                del operation[-1]
+                operation.append('/')
+                # print(operation)
+
+            else:
+                operation.append(value)
+                executeOperation()
+                operation = []
+                operation.append(float(v.get()))
+                operation.append('/')
+                value = 0
+                # print(operation)
 
     if(stringval == '='):
         if (len(operation) > 1):
@@ -186,4 +208,46 @@ buttonclear = tk.Button(master, text="CE", width=10,
                         command=lambda: buttonClear())
 buttonclear.grid(row=0, column=3)
 
+
+def keyEvent(key):
+    # print(key.keysym)
+    if(key.keysym == "0"):
+        buttonClick("0")
+    if(key.keysym == "1"):
+        buttonClick("1")
+    if(key.keysym == "2"):
+        buttonClick("2")
+    if(key.keysym == "3"):
+        buttonClick("3")
+    if(key.keysym == "4"):
+        buttonClick("4")
+    if(key.keysym == "5"):
+        buttonClick("5")
+    if(key.keysym == "6"):
+        buttonClick("6")
+    if(key.keysym == "7"):
+        buttonClick("7")
+    if(key.keysym == "8"):
+        buttonClick("8")
+    if(key.keysym == "9"):
+        buttonClick("9")
+    if(key.keysym == "plus"):
+        buttonOperation("+")
+    if(key.keysym == "minus"):
+        buttonOperation("-")
+    if(key.keysym == "asterisk"):
+        buttonOperation("x")
+    if(key.keysym == "slash"):
+        buttonOperation("/")
+    if(key.keysym == "Return"):
+        buttonOperation("=")
+    if(key.keysym == "equal"):
+        buttonOperation("=")
+    if(key.keysym == "Escape"):
+        buttonClear()
+    if(key.keysym == "BackSpace"):
+        buttonClear()
+
+
+master.bind_all('<KeyRelease>', keyEvent)
 master.mainloop()
